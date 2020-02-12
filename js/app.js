@@ -29,7 +29,7 @@ Beast.prototype.render = function() {
   $('main').append($newSection);
 };
 
-$.ajax('/data/page-1.json', {method: 'GET', dataType: 'JSON'})
+$.ajax('data/page-1.json', {method: 'GET', dataType: 'JSON'})
   .then(data => {
     data.forEach(object => {
       new Beast(object).render();
