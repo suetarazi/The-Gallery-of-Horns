@@ -1,6 +1,7 @@
 'use strict';
 
-const createdImages = [];
+const createdBeasts = [];
+const dropdownOptions = [];
 
 function Beast (obj) {
   this.image_url = obj.image_url;
@@ -8,7 +9,7 @@ function Beast (obj) {
   this.description = obj.description;
   this.keyword = obj.keyword;
   this.horns = obj.horns;
-  createdImages.push(this);
+  createdBeasts.push(this);
 }
 
 Beast.prototype.render = function() {
@@ -33,4 +34,26 @@ $.ajax('/data/page-1.json', {method: 'GET', dataType: 'JSON'})
     data.forEach(object => {
       new Beast(object).render();
     });
+    getUniqueKeywords();
+    renderOptions();
   });
+
+function getUniqueKeywords() {
+  createdBeasts.forEach(object => {
+    if(dropdownOptions.includes(object.keyword) === false) {
+      dropdownOptions.push(object.keyword);
+    }
+  });
+}
+
+function renderOptions() {
+  dropdownOptions.forEach(keyword => {
+    const $newOption = $('<option></option>');
+    $newOption.text(keyword);
+    $('#filter').append($newOption);
+  });
+}
+
+// getUniqueKeywords();
+
+// renderOptions();
