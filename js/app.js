@@ -19,6 +19,8 @@ Beast.prototype.render = function() {
   const $newSection = $('<section></section>');
   //fill the new section:
   $newSection.html(beastTemplate);
+  //assign identifying value
+  $newSection.attr('data-keyword', this.keyword);
   //h2 assign
   $newSection.find('h2').text(this.title);
   //image assign
@@ -53,3 +55,18 @@ function renderOptions() {
     $('#filter').append($newOption);
   });
 }
+
+$('#filter').on('change', function() {
+  const selectedText = $(this).find('option:selected').text();
+  console.log(selectedText);
+  $('section').hide();
+  $('section').each(index => {
+    var $currentSection = $('section')[index];
+    console.log($($currentSection));
+    console.log($($currentSection).attr('data-keyword'));
+    console.log(selectedText);
+    if($($currentSection).attr('data-keyword') === selectedText) {
+      $($currentSection).show();
+    }
+  });
+});
