@@ -1,12 +1,18 @@
 /* layout.css */
 
+header {
+    margin-bottom: 50px;
+}
+
+#photo-template {
+    display: none;
+}
+
 section {
-    max-width: 100vw;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 5px;
+    width: 25%;
+    height: 400px;
+    overflow: auto;
 }
-
-img {
-
-    max-width: 100%;
-}
-
-
