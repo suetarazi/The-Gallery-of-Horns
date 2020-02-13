@@ -48,7 +48,7 @@ function getUniqueKeywords() {
 
 function renderOptions() {
   const dropdownOptions = getUniqueKeywords();
-  $('#filter option').remove();
+  $('#filter option[value!="default"]').remove();
   dropdownOptions.forEach(keyword => {
     const $newOption = $('<option></option>');
     $newOption.text(keyword);
