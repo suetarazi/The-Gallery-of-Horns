@@ -31,22 +31,25 @@ Beast.prototype.render = function() {
   $('main').append($newSection);
 };
 
-$.ajax('data/page-1.json', {method: 'GET', dataType: 'JSON'})
-  .then(data => {
-    data.forEach(object => {
-      new Beast(object).render();
+const renderJSON = (page) => {
+  let filePath = `data/page-${page}.json`;
+  $.ajax(filePath, {method: 'GET', dataType: 'JSON'})
+    .then(data => {
+      data.forEach(object => {
+        new Beast(object).render();
+      });
+      getUniqueKeywords();
+      renderOptions();
     });
-    getUniqueKeywords();
-    renderOptions();
-  });
 
-function getUniqueKeywords() {
-  createdBeasts.forEach(object => {
-    if(dropdownOptions.includes(object.keyword) === false) {
-      dropdownOptions.push(object.keyword);
-    }
-  });
-}
+  function getUniqueKeywords() {
+    createdBeasts.forEach(object => {
+      if(dropdownOptions.includes(object.keyword) === false) {
+        dropdownOptions.push(object.keyword);
+      }
+    });
+  }
+};
 
 function renderOptions() {
   dropdownOptions.forEach(keyword => {
@@ -70,3 +73,5 @@ $('#filter').on('change', function() {
     }
   });
 });
+
+renderJSON(1);
