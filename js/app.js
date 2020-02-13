@@ -53,7 +53,3 @@ function renderOptions() {
     $('#filter').append($newOption);
   });
 }
-
-// getUniqueKeywords();
-
-// renderOptions();
