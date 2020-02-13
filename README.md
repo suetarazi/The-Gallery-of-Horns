@@ -20,13 +20,13 @@ Actual: 1:40
 
 ## Feature B2: Templating
 Estimate of time: 1 hour
-Start: 12:00 a.m.
-Finish: 12:40 a.m.
-Actual: 0:40
+Start: 12:00
+Finish: 12:40 p.m.
+Actual: 40 minutes
 
 ## Feature B3: Styling with Flexbox
-Estimate of time: 
-Start: 
+Estimate of time: 30
+Start: 12:40 p.m.
 Finish: 
 Actual: 
 
