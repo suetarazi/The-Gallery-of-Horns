@@ -1,7 +1,7 @@
 'use strict';
 
-const createdBeasts = [];
-const dropdownOptions = [];
+let createdBeasts = [];
+let page = 1; 
 
 function Beast (obj) {
   this.image_url = obj.image_url;
@@ -32,26 +32,33 @@ Beast.prototype.render = function() {
 };
 
 const renderJSON = (page) => {
+  $('section[id!="photo-template"]').detach(); 
+  createdBeasts = [];  
   let filePath = `data/page-${page}.json`;
   $.ajax(filePath, {method: 'GET', dataType: 'JSON'})
     .then(data => {
       data.forEach(object => {
         new Beast(object).render();
       });
-      getUniqueKeywords();
+      
       renderOptions();
     });
 
-  function getUniqueKeywords() {
-    createdBeasts.forEach(object => {
-      if(dropdownOptions.includes(object.keyword) === false) {
-        dropdownOptions.push(object.keyword);
-      }
-    });
-  }
-};
+  };
+  
+function getUniqueKeywords() {
+  const uniqueKeyWords=[];
+  createdBeasts.forEach(object => {
+    if(uniqueKeyWords.includes(object.keyword) === false) {
+      uniqueKeyWords.push(object.keyword);
+    }
+  });
+return (uniqueKeyWords);
+}
 
 function renderOptions() {
+  const dropdownOptions = getUniqueKeywords();
+  $('#filter option').remove();
   dropdownOptions.forEach(keyword => {
     const $newOption = $('<option></option>');
     $newOption.text(keyword);
@@ -59,7 +66,7 @@ function renderOptions() {
   });
 }
 
-$('#filter').on('change', function() {
+$('#filter').change(function() {
   const selectedText = $(this).find('option:selected').text();
   console.log(selectedText);
   $('section').hide();
@@ -74,4 +81,9 @@ $('#filter').on('change', function() {
   });
 });
 
-renderJSON(1);
+$(".pagination").click(function(){
+  let page = $(this).attr('data-page');
+  renderJSON(page);
+});
+
+renderJSON(page);
