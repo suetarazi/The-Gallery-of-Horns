@@ -15,8 +15,8 @@ Actual: incomplete
 ## Feature B1: Pagination
 Estimate of time: 1 1/2 hours
 Start: 10:00 a.m.
-Finish: 
-Actual: 
+Finish: 11:40 a.m.
+Actual: 1:40
 
 ## Feature B2: Templating
 Estimate of time: 
