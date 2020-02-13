@@ -26,7 +26,7 @@ Actual: 40 minutes
 
 ## Feature B3: Styling with Flexbox
 Estimate of time: 30
-Start: 12:40 p.m.
+Start: 1:00 p.m.
 Finish: 
 Actual: 
 

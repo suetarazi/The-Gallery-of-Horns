@@ -8,12 +8,3 @@ html, body {
 body {
     background-color: bisque;
 }
-
-nav li {
-    display: inline;
-    margin: 50px;
-    background-color: blue;
-    color: white; 
-    line-height: 25px;
-    padding: 10px; 
-}

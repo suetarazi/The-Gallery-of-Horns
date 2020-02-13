@@ -19,16 +19,21 @@
     </script>
   </head>
   <body>
-    <nav>
-      <ul>
-        <li data-page="1" class="pagination">Page 1</li>
-        <li data-page="2" class="pagination">Page 2</li>
-      </ul>
-    </nav>
     <header>
       <h1>The Gallery of Horns</h1>
+        <nav>
+          <ul>
+            <li data-page="1" class="pagination">Page 1</li>
+            <li data-page="2" class="pagination">Page 2</li>
+          </ul>
+        </nav>
       <select id="filter">
         <option value="default">Filter by Keyword</option>
+      </select>
+      <select id="sort">
+        <option value="default">Sort Items By...</option>
+        <option value="name">Name (Alphabetical)</option>
+        <option value="horns">Number of Horns</option>
       </select>
     </header>
     <main>
