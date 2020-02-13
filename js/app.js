@@ -1,7 +1,8 @@
 'use strict';
 
 let createdBeasts = [];
-let page = 1; 
+let page = 1;
+
 
 function Beast (obj) {
   this.image_url = obj.image_url;
@@ -13,39 +14,28 @@ function Beast (obj) {
 }
 
 Beast.prototype.render = function() {
-  //create a template
-  const beastTemplate = $('#photo-template').html();
-  //make a new <section>
-  const $newSection = $('<section></section>');
-  //fill the new section:
-  $newSection.html(beastTemplate);
-  //assign identifying value
-  $newSection.attr('data-keyword', this.keyword);
-  //h2 assign
-  $newSection.find('h2').text(this.title);
-  //image assign
-  $newSection.find('img').attr('src', this.image_url);
-  //p assign
-  $newSection.find('p').text(this.description);
-  //main append
-  $('main').append($newSection);
+  const source = $('#beast-template').html();
+  const template = Handlebars.compile(source);
+  const context = {title: this.title, keyword: this.keyword, image_url: this.image_url, description: this.description};
+  const newSection = template(context);
+  console.log(newSection);
+  $('main').append(newSection);
 };
 
+
 const renderJSON = (page) => {
-  $('section[id!="photo-template"]').detach(); 
-  createdBeasts = [];  
+  $('section[id!="photo-template"]').detach();
+  createdBeasts = [];
   let filePath = `data/page-${page}.json`;
   $.ajax(filePath, {method: 'GET', dataType: 'JSON'})
     .then(data => {
       data.forEach(object => {
         new Beast(object).render();
       });
-      
       renderOptions();
     });
+};
 
-  };
-  
 function getUniqueKeywords() {
   const uniqueKeyWords=[];
   createdBeasts.forEach(object => {
@@ -53,7 +43,7 @@ function getUniqueKeywords() {
       uniqueKeyWords.push(object.keyword);
     }
   });
-return (uniqueKeyWords);
+  return (uniqueKeyWords);
 }
 
 function renderOptions() {
@@ -81,7 +71,7 @@ $('#filter').change(function() {
   });
 });
 
-$(".pagination").click(function(){
+$('.pagination').click(function(){
   let page = $(this).attr('data-page');
   renderJSON(page);
 });
