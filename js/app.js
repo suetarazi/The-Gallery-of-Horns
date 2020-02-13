@@ -24,7 +24,7 @@ Beast.prototype.render = function() {
 
 
 const renderJSON = (page) => {
-  $('section[id!="photo-template"]').detach();
+  $('section').detach();
   createdBeasts = [];
   let filePath = `data/page-${page}.json`;
   $.ajax(filePath, {method: 'GET', dataType: 'JSON'})
