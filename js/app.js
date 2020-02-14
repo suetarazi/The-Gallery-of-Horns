@@ -34,8 +34,8 @@ const renderJSON = (page, sort) => {
       createdBeasts.forEach(beast => {
         beast.render();
       });
+      renderOptions();
     });
-  renderOptions();
 };
 
 const sortBeasts = (sort) => {
