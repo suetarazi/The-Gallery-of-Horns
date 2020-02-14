@@ -95,7 +95,7 @@ $('#sort').change(function() {
 });
 
 $('.pagination').click(function(){
-  let page = $(this).attr('data-page');
+  page = $(this).attr('data-page');
   renderJSON(page, defaultSort);
 });
 
