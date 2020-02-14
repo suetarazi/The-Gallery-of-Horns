@@ -26,12 +26,13 @@ Actual: 40 minutes
 
 ## Feature B3: Styling with Flexbox
 Estimate of time: 30
-Start: 1:00 p.m.
-Finish: 
-Actual: 
+Start: 12:40 p.m.
+Finish: 1:30 p.m.
+Actual: 50 minutes
+
 
 ## Feature B4: Sort the Images
-Estimate of time: 
+Estimate of time: 1 hour
 Start: 
 Finish: 
 Actual: 
