@@ -2,7 +2,7 @@
 
 let createdBeasts = [];
 let page = 1;
-
+const defaultSort = 'alphabetical';
 
 function Beast (obj) {
   this.image_url = obj.image_url;
@@ -18,22 +18,44 @@ Beast.prototype.render = function() {
   const template = Handlebars.compile(source);
   const context = {title: this.title, keyword: this.keyword, image_url: this.image_url, description: this.description};
   const newSection = template(context);
-  console.log(newSection);
   $('main').append(newSection);
 };
 
-
-const renderJSON = (page) => {
+const renderJSON = (page, sort) => {
   $('section').detach();
   createdBeasts = [];
   let filePath = `data/page-${page}.json`;
   $.ajax(filePath, {method: 'GET', dataType: 'JSON'})
     .then(data => {
       data.forEach(object => {
-        new Beast(object).render();
+        new Beast(object);
+      });
+      sortBeasts(sort);
+      createdBeasts.forEach(beast => {
+        beast.render();
       });
       renderOptions();
     });
+};
+
+const sortBeasts = (sort) => {
+  if(sort === 'alphabetical') {
+    createdBeasts.sort((a, b) => {
+      var aL = a.title.toLowerCase();
+      var bL = b.title.toLowerCase();
+      if(aL>bL) {
+        return 1;
+      } else if(aL<bL) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+  } else if(sort === 'horns') {
+    createdBeasts.sort((a, b) => {
+      return (b.horns - a.horns);
+    });
+  }
 };
 
 function getUniqueKeywords() {
@@ -58,22 +80,23 @@ function renderOptions() {
 
 $('#filter').change(function() {
   const selectedText = $(this).find('option:selected').text();
-  console.log(selectedText);
   $('section').hide();
   $('section').each(index => {
     var $currentSection = $('section')[index];
-    console.log($($currentSection));
-    console.log($($currentSection).attr('data-keyword'));
-    console.log(selectedText);
     if($($currentSection).attr('data-keyword') === selectedText) {
       $($currentSection).show();
     }
   });
 });
 
-$('.pagination').click(function(){
-  let page = $(this).attr('data-page');
-  renderJSON(page);
+$('#sort').change(function() {
+  const selected = $(this).find('option:selected').attr('value');
+  renderJSON(page, selected);
 });
 
-renderJSON(page);
+$('.pagination').click(function(){
+  let page = $(this).attr('data-page');
+  renderJSON(page, defaultSort);
+});
+
+renderJSON(page, defaultSort);
