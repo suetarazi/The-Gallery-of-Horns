@@ -41,3 +41,7 @@ nav li {
 nav li:hover {
   cursor: pointer;
 }
+
+img {
+  border-radius: 20px;
+}
